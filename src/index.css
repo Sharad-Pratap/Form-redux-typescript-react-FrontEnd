@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.gradient-custom{
+  background: linear-gradient(to right #DBDDEA);
+}
+@media (min-width:992) {
+  .container{
+    max-width: 500px !important;
+  }
+}

@@ -1,56 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
+import Dashboard from "./pages/Dashboard";
+import Auth from "./pages/Auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAppDispatch } from "./app/hooks";
+import { useEffect } from "react";
+import { setUser } from "./features/authSlice";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  useEffect(()=>{
+    dispatch(setUser(user))
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <BrowserRouter>
+        <ToastContainer />
+        <Routes>
+          <Route path="/" element={<Navigate to="/auth" replace />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
