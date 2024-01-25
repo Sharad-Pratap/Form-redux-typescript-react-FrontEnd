@@ -7,6 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAppDispatch } from "./app/hooks";
 import { useEffect } from "react";
 import { setUser } from "./features/authSlice";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme();
 
 function App() {
   const dispatch = useAppDispatch();
@@ -18,12 +21,14 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <ThemeProvider theme={theme}>
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Navigate to="/auth" replace />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
+        </ThemeProvider>
       </BrowserRouter>
     </div>
   );
