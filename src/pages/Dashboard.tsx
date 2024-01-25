@@ -132,7 +132,7 @@ const Dashboard = () => {
             onClick={handleLogout}
             style={{ opacity: 1, backgroundColor: "#007BFF", color: "#ffffff" }}
           >
-            Logout
+            Logout                 
           </button>
         </div>
       </main>
